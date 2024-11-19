@@ -67,6 +67,7 @@ const bitcoinProvider = new BitcoinProvider(
   bitcoinProviderApi
 );
 const btcWallet = BitcoinWallet.fromPrivateKey(
+  // You can use your own private key here
   secretManager.getMasterPrivKey(),
   bitcoinProvider
 );
@@ -163,6 +164,7 @@ const evmRelay = new EvmRelay(swapResult.val, orderBookApi, auth);
 // Initiate the swap (for the first time, some eth is required to approve the token)
 // All the subsequent swaps are gasless
 // Common error here is transfer amount exceeds balance, meaning you dont have token in your wallet
+// When you are going from bitcoin to wbtc, you need to deposit funds in order.source_swap_id
 const initRes = await evmRelay.init(ethereumWalletClient);
 if (initRes.error) {
   console.log(ethereumWalletClient.account.address);
